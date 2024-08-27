@@ -3,7 +3,7 @@
 import {
   WalletDisconnectButton,
   WalletMultiButton,
-} from '@solana/wallet-adapter-react-ui'
+} from '@/components/dynamic/WalletAdapters'
 import Image from 'next/image'
 
 const HomeView = () => {
