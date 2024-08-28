@@ -1,27 +1,48 @@
+import { nanoid } from 'nanoid'
 import { apiResponse } from '../api.helpers'
 import { supabaseClient } from '../superbase_client.util'
 
 export class UserService {
-  private LOG_NAME = [UserService]
-
-  async getUser(pubKey: string) {
+  static async getUser(pubKey: string) {
     try {
-      let getUser = await supabaseClient.from('user').select('*')
+      let { data: users, error } = await supabaseClient
+        .from('user')
+        .select('*')
+        .eq('pub_key', pubKey)
 
-      const is = true
+      if (error)
+        return apiResponse(false, error?.message || 'failed to get user', error)
 
-      if (is) return getUser.data
+      return apiResponse(true, 'user details', users![0])
+    } catch (error: any) {
+      console.log(`getUser: `, error?.message)
+      return apiResponse(false, 'failed fetching user', error?.message)
+    }
+  }
+
+  static async loginOrSignUp(pubKey: string) {
+    try {
+      let getUser = await UserService.getUser(pubKey)
+
+      if (!getUser.success)
+        return apiResponse(
+          false,
+          'user details',
+          getUser?.message || 'something went wrong'
+        )
+      if (getUser.data) return apiResponse(true, 'user details', getUser.data)
 
       let { data: user, error } = await supabaseClient
         .from('user')
-        .insert({ pub_key: pubKey })
+        .insert({ id: nanoid(20), pub_key: pubKey })
+        .select()
 
-      if (error) return apiResponse(true, 'user details', error.message)
+      if (error) return apiResponse(false, 'failed to save user', error.message)
 
       return apiResponse(true, 'user details', user)
     } catch (error: any) {
-      console.log(`${this.LOG_NAME} : `, error?.message)
-      return apiResponse(false, 'failed fetching user', error?.message)
+      console.log(`loginOrSignUp :`, error?.message)
+      return apiResponse(false, 'failed saving user', error?.message)
     }
   }
 }

@@ -1,4 +1,4 @@
-import { ApiResponse } from '@/interfaces/api.interface'
+import { ApiResponse } from '@/interfaces'
 
 export const apiResponse = <D = any>(
   success: boolean,
