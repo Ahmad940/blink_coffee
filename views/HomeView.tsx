@@ -1,6 +1,5 @@
 'use client'
 
-import BLinkDemo from '@/components/BlinkDemo'
 import { Create } from '@/components/Create'
 import { Hero } from '@/components/Hero'
 import { NavigationBar } from '@/components/NavBar'
@@ -15,8 +14,6 @@ const HomeView = () => {
       <Hero />
       <Create />
       <SearchLayout />
-      
-      
     </main>
   )
 }

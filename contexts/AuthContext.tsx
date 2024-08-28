@@ -73,6 +73,7 @@ export default function AuthContextProvider({ children }: ReactChildrenProps) {
         variant: 'destructive',
       })
 
+    console.log('user', getUser.data)
     handleSetUser(getUser.data)
   }
 
