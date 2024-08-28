@@ -1,22 +1,19 @@
 'use client'
 
-import CreateBlinkForm from '@/components/core/profile/CreateBlinkForm'
-import { WalletMultiButton } from '@/components/dynamic/WalletAdapters'
+import { Create } from '@/components/Create'
+import { Hero } from '@/components/Hero'
+import { NavigationBar } from '@/components/NavBar'
+import { SearchLayout } from '@/components/SearchBlink'
 
 const HomeView = () => {
   return (
-    <main>
-      <div className='flex flex-col gap-10 items-center justify-between p-20'>
-        <WalletMultiButton />
-
-        <div className='mt-20'>
-          <CreateBlinkForm />
-        </div>
+    <main className='flex flex-col items-center justify-between p-4 bg-black'>
+      <div className='mb-[80px]'>
+        <NavigationBar />
       </div>
-
-      {/* <div className='max-w-[100vw'>
-        <BLinkDemo />
-      </div> */}
+      <Hero />
+      <Create />
+      <SearchLayout />
     </main>
   )
 }
