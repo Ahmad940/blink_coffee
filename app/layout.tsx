@@ -2,11 +2,15 @@ import { Toaster } from '@/components/ui/toaster'
 import AuthContextProvider from '@/contexts/AuthContext'
 import { WalletAdapterProvider } from '@/contexts/WalletProvider'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Martel, Montaga, Monoton, Montserrat } from 'next/font/google'
 
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
+const mat = Montserrat({
+  weight: '400',
+  subsets: ['latin']
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={mat.className}>
         <WalletAdapterProvider>
           <AuthContextProvider>
             <Toaster />

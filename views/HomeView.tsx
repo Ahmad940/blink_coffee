@@ -1,16 +1,22 @@
 'use client'
 
 import BLinkDemo from '@/components/BlinkDemo'
-import { WalletMultiButton } from '@/components/dynamic/WalletAdapters'
+import { Create } from '@/components/Create'
+import { Hero } from '@/components/Hero'
+import { NavigationBar } from '@/components/NavBar'
+import { SearchLayout } from '@/components/SearchBlink'
 
 const HomeView = () => {
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24 bg-black'>
-      <WalletMultiButton />
-
-      <div className='max-w-[100vw'>
-        <BLinkDemo />
+    <main className='flex flex-col items-center justify-between p-4 bg-black'>
+      <div className='mb-[80px]'>
+        <NavigationBar />
       </div>
+      <Hero />
+      <Create />
+      <SearchLayout />
+      
+      
     </main>
   )
 }
