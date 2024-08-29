@@ -1,5 +1,5 @@
 import { Inter, Martel, Montaga, Montserrat, Monoton , M_PLUS_1 } from 'next/font/google'
-
+import { WalletMultiButton } from '@/components/dynamic/WalletAdapters'
 
 const inter = Montserrat({ subsets: ['latin'] })
 
@@ -13,10 +13,8 @@ export const Hero = () => {
                  <div className='w-[70%] text-center flex items-center justify-center mt-10'>
                   <p className={`text-xl  font-extralight text-white/80 `}>Fuel your crypto innovations with ease. Accept support through Blinks.</p>
                  </div>
-                 <div className='w-[50%] h-14 rounded-md flex items-center mt-24 justify-center bg-[#512DA8]'> 
-                    <button>
-                        Start
-                    </button>
+                 <div className='w-[50%] h-14 rounded-md flex items-center mt-24 justify-center '> 
+                    <WalletMultiButton />
                  </div>
                </div>
             </div>
