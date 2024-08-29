@@ -8,8 +8,8 @@ import { useState } from 'react'
 
 export const SearchLayout = () => {
     const [actionUrl,setActionUrl] = useState('')
-    const actionApiUrl = 'solana-action:http://localhost:3000/api/actions/blinkme'
-    //const actionApiUrl = 'https://dial.to/?action=solana-action:https://blinkathon.fun/api/form'
+    //const actionApiUrl = 'solana-action:http://localhost:3000/api/actions/blinkme'
+    const actionApiUrl = 'https://dial.to/?action=solana-action:https://blinkathon.fun/api/form'
     const { adapter } = useActionSolanaWalletAdapter(clusterApiUrl('devnet'))
     const { action } =useAction({url:actionApiUrl, adapter})
 
