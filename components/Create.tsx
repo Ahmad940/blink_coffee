@@ -7,8 +7,8 @@ import { Inter, Martel, Montaga, Montserrat, Monoton , M_PLUS_1 } from 'next/fon
 export const Create = () => {
     return(
         <div className="w-[90%] ml-auto min-h-screen mr-auto flex  items-center justify-center flex-col ">
-            <div className="w-[75%] rounded-2xl py-0 px-3 border flex flex-col  bg-black/65 border-white/5 h-[600px]">
-            <div className=' ml-auto mr-auto bg-white/20 rounded-full flex items-center justify-center w-[140px] h-10 mb-4 mt-20'>
+            <div className="w-[75%] rounded-2xl py-0 px-3 border flex flex-col  bg-white/5 border-white/5 h-[600px]">
+            <div className=' ml-auto mr-auto bg-black/20 rounded-full flex items-center justify-center w-[140px] h-10 mb-4 mt-20'>
             <p className={`text-lg font-light text-white/80 `}>Support </p>
             </div>
             
