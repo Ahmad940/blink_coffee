@@ -17,19 +17,7 @@ export const GET = async (req: Request) => {
     links: {
       actions: [
         {
-          label: 'Send 0.1',
-          href: '/blinkme',
-        },
-        {
-          label: 'Send 0.5',
-          href: '/blinkme',
-        },
-        {
-          label: 'Send 1',
-          href: '/blinkme',
-        },
-        {
-          label: 'Send',
+          label: 'Blink Me 😉',
           href: '/blinkme',
           parameters: [
             {

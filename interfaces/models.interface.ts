@@ -1,6 +1,12 @@
 export interface UserInterface {
   id: string
   pub_key: string
+  user_name?: string
+  profile_img?: string
+  email?: string
+  first_name?: string
+  last_name?: string
+  about?: string
 
   created_at: Date
   updated_at?: Date
