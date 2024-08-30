@@ -1,6 +1,7 @@
 import { ActionAdapter, Blink, useAction } from '@dialectlabs/blinks'
 
 import '@dialectlabs/blinks/index.css'
+import { Skeleton } from './ui/skeleton'
 
 interface Props {
   url: string
@@ -19,7 +20,7 @@ export const BlinkLoader = ({ url, adapter }: Props) => {
           websiteUrl={new URL(url).hostname}
         />
       ) : (
-        <>Loading.. Blink</>
+        <Skeleton className='h-full w-full rounded-xl' />
       )}
     </div>
   )

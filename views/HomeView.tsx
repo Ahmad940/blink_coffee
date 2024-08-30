@@ -1,12 +1,19 @@
 'use client'
 
-import BlinksLists from '@/components/core/home/BlicksLists'
 import { Create } from '@/components/Create'
 import { Footer } from '@/components/Footer'
 import { EveryOne } from '@/components/ForEveryone'
 import { Hero } from '@/components/Hero'
 import { NavigationBar } from '@/components/NavBar'
 import { useAuth } from '@/contexts/AuthContext'
+import dynamic from 'next/dynamic'
+
+export const BlinksLists = dynamic(
+  async () => await import('@/components/core/home/BlinksLists'),
+  {
+    ssr: false,
+  }
+)
 
 const HomeView = () => {
   const { user } = useAuth()
