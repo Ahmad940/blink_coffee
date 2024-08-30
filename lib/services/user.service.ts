@@ -70,7 +70,8 @@ export class UserService {
 
       let { data: user, error } = await supabaseClient
         .from('user')
-        .update({ ...payload, pub_key })
+        .update({ ...payload })
+        .eq('pub_key', pub_key)
         .select()
 
       if (error) return apiResponse(false, 'failed to save user', error.message)
