@@ -45,4 +45,40 @@ export class UserService {
       return apiResponse(false, 'failed saving user', error?.message)
     }
   }
+
+  static async updateUser(
+    pub_key: string,
+    payload: {
+      title: string
+      user_name?: string
+      profile_img?: string
+      email?: string
+      first_name?: string
+      last_name?: string
+      about?: string
+    }
+  ) {
+    try {
+      let getUser = await UserService.getUser(pub_key)
+
+      if (!getUser.success)
+        return apiResponse(
+          false,
+          'user details',
+          getUser?.message || 'something went wrong'
+        )
+
+      let { data: user, error } = await supabaseClient
+        .from('user')
+        .update({ ...payload, pub_key })
+        .select()
+
+      if (error) return apiResponse(false, 'failed to save user', error.message)
+
+      return apiResponse(true, 'user details', user)
+    } catch (error: any) {
+      console.log(`updateUser :`, error?.message)
+      return apiResponse(false, 'failed saving user', error?.message)
+    }
+  }
 }
