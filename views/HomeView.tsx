@@ -19,7 +19,7 @@ export const BlinksLists = dynamic(
 const HomeView = () => {
   const { user } = useAuth()
   return (
-    <main className='flex flex-col items-center justify-between bg-black'>
+    <main className='flex flex-col items-center justify-between '>
       <div className='mb-[80px]'>
         <NavigationBar />
       </div>
