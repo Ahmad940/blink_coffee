@@ -72,12 +72,12 @@ const UpdateUserForm = ({}: ImageUploadButtonProps) => {
     if (!publicKey) return;
     const updateUserDetails = await UserService.updateUser(`${userPk !== null ? userPk : ''}`,{
       //title: titleRef.current?.value || '',
-      user_name: userNameRef.current?.value || '',
+      user_name: userNameRef.current?.value,
       profile_img: URL.createObjectURL(selectedImage) ,
-      email: emailRef.current?.value || '',
-      first_name: firstNameRef.current?.value || '',
-      last_name: lastNameRef.current?.value || '',
-      about: descriptionRef.current?.value || '',
+      email: emailRef.current?.value,
+      first_name: firstNameRef.current?.value,
+      last_name: lastNameRef.current?.value,
+      about: descriptionRef.current?.value ,
     });
 
     if(!updateUserDetails.success)
