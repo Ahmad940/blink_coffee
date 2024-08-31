@@ -5,7 +5,7 @@ import { UserCard } from './modals/UserCard'
 import { useState } from 'react'
 
 export const NavigationBar = () => {
-  const [istrue,setIstrue] = useState(false)
+  const [istrue,setIstrue] = useState<Boolean>(false)
   const { user } = useAuth()
     return(
         <div className="w-[100%] px-6 z-[999] mt-4 bg-slate-300/ mb-[200px] fixed inset-x-0 top-2 flex justify-center items-center">

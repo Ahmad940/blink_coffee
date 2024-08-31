@@ -1,7 +1,12 @@
 import { Card } from "../ui/card"
 import { SetStateAction } from "react"
 import { useRouter } from "next/router"
-export const UserCard = ({ setIstrue }) => {
+
+interface ChildComponentProps {
+    setIstrue: (value: boolean) => void;
+  }
+
+export const UserCard = ({ setIstrue }: ChildComponentProps) => {
 
     //const router = useRouter()
     const List = [
