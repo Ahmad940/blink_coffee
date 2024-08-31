@@ -18,11 +18,9 @@ export const Footer = () => {
         <div className="flex ml-auto">
            {
             socials && socials.map((item,i) => (
-                <>
                 <div key={i} className="w-8 ml-2 mr-2 h-8">
                     <img src={item.url} />
                 </div>
-                </>
             ))
            }
         </div>

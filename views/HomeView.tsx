@@ -1,5 +1,6 @@
 'use client'
 
+import CreateBlinkForm from '@/components/core/profile/CreateBlinkForm'
 import { Create } from '@/components/Create'
 import { Footer } from '@/components/Footer'
 import { EveryOne } from '@/components/ForEveryone'
@@ -20,7 +21,7 @@ const HomeView = () => {
         user ? 
          <>
           <Search />
-          <SearchLayout />
+         
          </> 
         :
          <>
