@@ -36,7 +36,9 @@ export const SearchLayout = ({ search }: Props) => {
   )
 
   const computeUrl = (id: string) => {
-    return `solana-action:${window.location.href}api/actions/blinkme?blink=${id}`
+    return typeof window !== undefined
+      ? `solana-action:${'window?.location?.href'}api/actions/blinkme?blink=${id}`
+      : ''
   }
 
   const fetchBlinks = async () => {
