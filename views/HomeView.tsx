@@ -1,6 +1,6 @@
 'use client'
 
-import CreateBlinkForm from '@/components/core/profile/CreateBlinkForm'
+import CreateBlinkForm from '@/components/core/profile/UpdateUserForm'
 import { Create } from '@/components/Create'
 import { Footer } from '@/components/Footer'
 import { EveryOne } from '@/components/ForEveryone'
