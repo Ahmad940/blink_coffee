@@ -49,7 +49,7 @@ export class UserService {
   static async updateUser(
     pub_key: string,
     payload: {
-      title: string
+      //title: string
       user_name?: string
       profile_img?: string
       email?: string
