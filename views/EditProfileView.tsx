@@ -21,7 +21,7 @@ const EditProfileView = () => {
     <main className='flex flex-col items-center justify-between bg-black'>
       <div className='mb-[80px] w-[100%] items-center justify-center flex flex-col'>
         <NavigationBar />
-        <div className='w-[100%] mt-[170px] text-white/90 flex flex-col items-center justify-center h-28 '>
+        <div className='w-[100%] mt-[200px] text-white/90 flex flex-col items-center justify-center h-28 '>
             <div className='w-[50%] mb-4 flex' >
                 <p className='text-2xl font-bold'>My Account</p>
             </div>

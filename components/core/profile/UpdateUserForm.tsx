@@ -39,10 +39,10 @@ const UpdateUserForm = ({}: props) => {
   const { toast } = useToast();
   const router = useRouter();
   const [categories, setCategories] = useState<CategoryInterface[]>([]);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<any>(null);
 
   const imageUploadInput: HTMLElement | null =
-    document.getElementById("image-upload");
+    window.document.getElementById("image-upload");
   const handleImageChange = (event: any) => {
     const file = event.target.files[0];
     setSelectedImage(file);
@@ -66,7 +66,7 @@ const UpdateUserForm = ({}: props) => {
     const updateUserDetails = await UserService.updateUser(`${userPk !== null ? userPk : ''}`,{
       //title: titleRef.current?.value || '',
       user_name: userNameRef.current?.value || '',
-      profile_img:`${selectedImage !== null ? URL.createObjectURL(selectedImage): ''}` ,
+      profile_img: URL.createObjectURL(selectedImage) ,
       email: emailRef.current?.value || '',
       first_name: firstNameRef.current?.value || '',
       last_name: lastNameRef.current?.value || '',
@@ -130,7 +130,7 @@ const UpdateUserForm = ({}: props) => {
   }, []);
 
   return (
-    <div className="w-[50%] mt-[40px]">
+    <div className="w-[50%] mt-[50px] mb-[100px]">
       <Card>
         <CardHeader>
           <CardTitle>Personal Info</CardTitle>
