@@ -31,7 +31,9 @@ export const SearchLayout = ({ search }: Props) => {
   const { toast } = useToast()
 
   const { isRegistryLoaded } = useActionsRegistryInterval()
-  const { adapter } = useActionSolanaWalletAdapter(clusterApiUrl('devnet'))
+  const { adapter } = useActionSolanaWalletAdapter(
+    clusterApiUrl('mainnet-beta')
+  )
 
   const computeUrl = (id: string) => {
     return `solana-action:${window.location.href}api/actions/blinkme?blink=${id}`
@@ -56,9 +58,7 @@ export const SearchLayout = ({ search }: Props) => {
 
   return (
     <div className='w-full mt-14 '>
-      <p className='text-sm text-center font-bold font-fredoka'>
-        
-      </p>
+      <p className='text-sm text-center font-bold font-fredoka'></p>
 
       {blinkLoading && (
         <div className='flex items-center justify-center'>
@@ -68,12 +68,12 @@ export const SearchLayout = ({ search }: Props) => {
 
       {isRegistryLoaded ? (
         <div className='mt-3 px-5 md:px-10 lg:px-28 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 auto-cols-max w-full ml-auto min-h-screen items-start'>
-          {blinks?.map((item,i) => (
+          {blinks?.map((item, i) => (
             <BlinkLoader key={i} url={computeUrl(item?.id)} adapter={adapter} />
           ))}
         </div>
       ) : (
-        <LoadingIcon />
+        <LoadingIcon className='mt-10 w-36 h-36' />
       )}
     </div>
   )
