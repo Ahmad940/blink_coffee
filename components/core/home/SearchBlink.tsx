@@ -57,7 +57,7 @@ export const SearchLayout = ({ search }: Props) => {
   return (
     <div className='w-full mt-14 '>
       <p className='text-sm text-center font-bold font-fredoka'>
-        Explore collections.
+        
       </p>
 
       {blinkLoading && (
@@ -68,8 +68,8 @@ export const SearchLayout = ({ search }: Props) => {
 
       {isRegistryLoaded ? (
         <div className='mt-3 px-5 md:px-10 lg:px-28 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 auto-cols-max w-full ml-auto min-h-screen items-start'>
-          {blinks?.map((item) => (
-            <BlinkLoader url={computeUrl(item?.id)} adapter={adapter} />
+          {blinks?.map((item,i) => (
+            <BlinkLoader key={i} url={computeUrl(item?.id)} adapter={adapter} />
           ))}
         </div>
       ) : (
