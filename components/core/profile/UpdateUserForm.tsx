@@ -32,8 +32,11 @@ import { FormEvent, useEffect, useRef, useState, HTMLInputTypeAttribute } from "
 
 
 interface props {}
+interface ImageUploadButtonProps {
+  onClick?: () => void; // Make onClick optional since it might not be used
+}  
 
-const UpdateUserForm = ({}: props) => {
+const UpdateUserForm = ({}: ImageUploadButtonProps) => {
   const { user } = useAuth();
   const { publicKey } = useWallet();
   const { toast } = useToast();
@@ -41,8 +44,12 @@ const UpdateUserForm = ({}: props) => {
   const [categories, setCategories] = useState<CategoryInterface[]>([]);
   const [selectedImage, setSelectedImage] = useState<any>(null);
 
-  const imageUploadInput: HTMLElement | null =
-    window.document.getElementById("image-upload");
+  const handleClick = () => {
+    const element = document?.getElementById('image-upload');
+    if (element) {
+      element.click();
+    }
+  };
   const handleImageChange = (event: any) => {
     const file = event.target.files[0];
     setSelectedImage(file);
@@ -144,7 +151,7 @@ const UpdateUserForm = ({}: props) => {
                 <div
                   className="h-20 w-20 bg-black/40 rounded-full flex justify-center items-center cursor-pointer"
                   onClick={() =>
-                    imageUploadInput?.click()
+                   handleClick()
                   }
                 >
                  <img src={`${user?.profile_img !== null ? user?.profile_img : './assets/yyy.png'}`} />
