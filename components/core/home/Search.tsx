@@ -16,7 +16,7 @@ export const Search = ({ search, setSearch }: Props) => {
         placeholder='Search for blink'
       />
       <Button>
-        <MagnifyingGlassIcon />
+        {'Open'}
       </Button>
     </div>
   )
