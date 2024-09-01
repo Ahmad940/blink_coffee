@@ -66,7 +66,7 @@ export const sendSPLToken = async (
 
   const latestBlockHash = await connection.getLatestBlockhash('confirmed')
   tx.recentBlockhash = await latestBlockHash.blockhash
-
+  const signature = await tx.signature
   console.log(
     '\x1b[32m', //Green Text
     `   Transaction Success!🎉`,
