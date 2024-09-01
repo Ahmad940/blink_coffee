@@ -4,7 +4,6 @@ import '@dialectlabs/blinks/index.css'
 import { clusterApiUrl } from '@solana/web3.js'
 import dynamic from 'next/dynamic'
 import { useMemo, useState } from 'react'
-import { BlinkLoader } from '@/components/BlinkLoader'
 
 interface Props {
   search: String
@@ -30,7 +29,9 @@ export const SearchLayout = ({ search }: Props) => {
   )
 
   const { isRegistryLoaded } = useActionsRegistryInterval()
-  const { adapter } = useActionSolanaWalletAdapter(clusterApiUrl('devnet'))
+  const { adapter } = useActionSolanaWalletAdapter(
+    clusterApiUrl('mainnet-beta')
+  )
   //  grid grid-cols-3
   return (
     <div className='w-full self-stretch'>
@@ -39,7 +40,6 @@ export const SearchLayout = ({ search }: Props) => {
         id: index + 1,
         url: actionApiUrls[Math.floor(Math.random() * actionApiUrls.length)],
       })).map((item) => ( */}
-     
     </div>
   )
 }

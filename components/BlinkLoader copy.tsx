@@ -13,7 +13,9 @@ interface Props {
 }
 
 export const BlinkLoader1 = ({ urls }: Props) => {
-  const { adapter } = useActionSolanaWalletAdapter(clusterApiUrl('devnet'))
+  const { adapter } = useActionSolanaWalletAdapter(
+    clusterApiUrl('mainnet-beta')
+  )
   const [actions, setActions] = useState<Action[]>([])
 
   const fetchActions = async () => {

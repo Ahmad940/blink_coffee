@@ -2,14 +2,14 @@ import { Toaster } from '@/components/ui/toaster'
 import AuthContextProvider from '@/contexts/AuthContext'
 import { WalletAdapterProvider } from '@/contexts/WalletProvider'
 import type { Metadata } from 'next'
-import { Inter, Martel, Montaga, Monoton, Montserrat } from 'next/font/google'
+import { Inter, Montserrat } from 'next/font/google'
 
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 const mat = Montserrat({
   weight: '400',
-  subsets: ['latin']
+  subsets: ['latin'],
 })
 
 export const metadata: Metadata = {

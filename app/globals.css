@@ -7,6 +7,20 @@
   src: url('../assets/Fredoka_One1/FredokaOne-Regular.ttf') format('truetype');
 }
 
+:root {
+  @apply leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 scroll-smooth;
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+}
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+body {
+  @apply font-inter;
+}
 
 body {
   background: linear-gradient(to bottom, transparent, rgb(80, 52, 121))
