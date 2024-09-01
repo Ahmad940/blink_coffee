@@ -4,22 +4,20 @@ import { useAuth } from '@/contexts/AuthContext'
 import { UserInterface } from '@/interfaces'
 import { UserService } from '@/lib/services/user.service'
 import { useEffect, useState } from 'react'
+import { useWallet } from '@solana/wallet-adapter-react'
 
 export const ProfileCard = () => {
   const [userLoading, setUserLoading] = useState<Boolean>(false)
   const [userData, setUserData] = useState<UserInterface>()
+  const [userPkey,setUserPkey] = useState<any>('')
   const { user } = useAuth()
 
-  useEffect(() => {
-    if (user) {
-      setUserData(user)
-    }
-  }, [user])
-
+  const { publicKey }:any = useWallet()
   const fetchUser = async () => {
+    
     setUserLoading(true)
     const { message, success, data } = await UserService.getUser(
-      userData?.pub_key || ''
+      publicKey
     )
     if (!success)
       return toast({

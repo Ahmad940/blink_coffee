@@ -255,8 +255,8 @@ const UpdateUserForm = ({}: props) => {
 
         <CardFooter className='flex justify-between'>
           {/* <Button variant='outline'>Cancel</Button> */}
-          <Button className='w-[160px]' onClick={handleForm}>
-            Edit Profile
+          <Button className='w-[160px] bg-[#512DA8] rounded-lg' onClick={handleForm}>
+            Save changes
           </Button>
         </CardFooter>
       </Card>
