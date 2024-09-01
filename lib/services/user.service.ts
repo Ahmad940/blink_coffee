@@ -20,6 +20,21 @@ export class UserService {
     }
   }
 
+  static async getUserByName(user_name: string) {
+    try {
+      let { data:user, error } = await supabaseClient
+      .from('user')
+      .select('*')
+      .eq('user_name', user_name)
+    if(error)
+      return apiResponse(false, error?.message || 'failed to get user', error )
+    return apiResponse(true, 'user details', user![0])
+    } catch (error: any) {
+      console.log(`get single user:`,error?.message)
+      return apiResponse(false, 'failed fetching user', error?.message)
+    }
+  }
+
   static async loginOrSignUp(pubKey: string) {
     try {
       let getUser = await UserService.getUser(pubKey)
@@ -45,6 +60,8 @@ export class UserService {
       return apiResponse(false, 'failed saving user', error?.message)
     }
   }
+
+  
 
   static async updateUser(
     pub_key: string,
