@@ -5,6 +5,8 @@ import {
   validatedQueryParams,
 } from '@/lib/blink.lib'
 import { BlinkService } from '@/lib/services/blink.service'
+import { SendNativeSol } from '@/lib/solana.lib'
+import { getSplTokenAddress, sendSPLToken } from '@/lib/spl.lib'
 import {
   ActionPostRequest,
   ActionPostResponse,
@@ -14,9 +16,7 @@ import {
 import {
   clusterApiUrl,
   Connection,
-  LAMPORTS_PER_SOL,
   PublicKey,
-  SystemProgram,
   Transaction,
 } from '@solana/web3.js'
 
@@ -61,10 +61,11 @@ export const GET = async (req: Request) => {
 // export const OPTIONS = GET
 
 export const POST = async (req: Request) => {
+  console.log('I ran', new Date(Date.now()).toLocaleTimeString())
   const requestUrl = new URL(req.url)
-  const { amount, toPubkey, blink_id } = validatedQueryParams(requestUrl)
+  const { amount, toPubkey, blink_id, token } = validatedQueryParams(requestUrl)
 
-  console.log('amount', amount, 'toPubkey', toPubkey.toBase58())
+  console.log('amount', amount, 'toPubkey', toPubkey.toBase58(), 'token', token)
 
   try {
     const body: ActionPostRequest = await req.json()
@@ -80,40 +81,32 @@ export const POST = async (req: Request) => {
       })
     }
 
-    const connection = new Connection(
-      process.env.SOLANA_RPC! || clusterApiUrl('mainnet-beta')
-    )
+    const connection = new Connection(clusterApiUrl('mainnet-beta'))
+    let transaction: Transaction = new Transaction()
 
-    // ensure the receiving account will be rent exempt
-    const minimumBalance = await connection.getMinimumBalanceForRentExemption(
-      0 // note: simple accounts that just store native SOL have `0` bytes of data
-    )
-    if (amount * LAMPORTS_PER_SOL < minimumBalance) {
-      throw `account may not be rent exempt: ${toPubkey.toBase58()}`
+    if (token === 'sol') {
+      transaction = await SendNativeSol(connection, {
+        amount,
+        toPubkey,
+        fromPubkey: account,
+      })
+    } else {
+      // await jupSwap({ amount, userPubKey: account })
+
+      transaction = await sendSPLToken(connection, {
+        amount,
+        toPubKey: toPubkey,
+        fromPubKey: account,
+        mintAddress: new PublicKey(getSplTokenAddress(token)!),
+      })
+
+      // const signedTransaction = await signTr
     }
-
-    // create an instruction to transfer native SOL from one wallet to another
-    const transferSolInstruction = SystemProgram.transfer({
-      fromPubkey: account,
-      toPubkey: toPubkey,
-      lamports: amount * LAMPORTS_PER_SOL,
-    })
-
-    // get the latest blockhash amd block height
-    const { blockhash, lastValidBlockHeight } =
-      await connection.getLatestBlockhash()
-
-    // create a legacy transaction
-    const transaction = new Transaction({
-      feePayer: account,
-      blockhash,
-      lastValidBlockHeight,
-    }).add(transferSolInstruction)
 
     const payload: ActionPostResponse = await createPostResponse({
       fields: {
-        transaction,
-        message: `Sent ${amount} SOL to Alice: ${toPubkey.toBase58()}`,
+        transaction: transaction,
+        message: `Sent ${amount} SOL to: ${toPubkey.toBase58()}`,
       },
       // note: no additional signers are needed
       // signers: [],

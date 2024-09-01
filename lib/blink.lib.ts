@@ -1,5 +1,5 @@
 import { ActionGetResponse, ACTIONS_CORS_HEADERS } from '@solana/actions'
-import { PublicKey } from '@solana/web3.js'
+import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js'
 
 export const blinkError = (errorMessage: string) => {
   const action: ActionGetResponse = {
@@ -39,8 +39,18 @@ export const generatePaymentBlink = ({
       actions: [
         {
           label: 'Blink Me 😉',
-          href: `${baseURL}&amount={amount}`,
+          href: `${baseURL}&amount={amount}&token={token}`,
           parameters: [
+            {
+              type: 'radio',
+              label: 'Token',
+              name: 'token',
+              options: [
+                { label: 'Sol', value: 'sol', selected: true },
+                { label: 'Send', value: 'send' },
+                { label: 'USDC', value: 'usdc' },
+              ],
+            },
             {
               name: 'amount',
               required: true,
@@ -58,6 +68,8 @@ export const generatePaymentBlink = ({
 export const validatedQueryParams = (requestUrl: URL) => {
   let amount: number = 0
   let blink_id: string = ''
+  let token: string = ''
+
   let toPubkey: PublicKey = new PublicKey(
     '5QDwYS1CtHzN1oJ2eij8Crka4D2eJcUavMcyuvwNRM9'
   )
@@ -72,7 +84,8 @@ export const validatedQueryParams = (requestUrl: URL) => {
 
   try {
     if (requestUrl.searchParams.get('amount')) {
-      amount = parseFloat(requestUrl.searchParams.get('amount')!)
+      amount =
+        parseFloat(requestUrl.searchParams.get('amount')!) * LAMPORTS_PER_SOL
     }
 
     if (amount <= 0) throw 'amount is too small'
@@ -81,16 +94,26 @@ export const validatedQueryParams = (requestUrl: URL) => {
   }
 
   try {
-    if (!requestUrl.searchParams.get('blink')) {
+    if (!requestUrl.searchParams.get('blink'))
       throw "input query 'blink' not found"
-    }
+
+    blink_id = requestUrl.searchParams.get('blink')!
   } catch (error) {
     throw 'Invalid input query parameter: amount'
+  }
+
+  try {
+    if (requestUrl.searchParams.get('token')) {
+      token = requestUrl.searchParams.get('token')!
+    }
+  } catch (err) {
+    throw 'Invalid input query parameter: to'
   }
 
   return {
     amount,
     toPubkey,
     blink_id,
+    token,
   }
 }
