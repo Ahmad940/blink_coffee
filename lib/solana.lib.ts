@@ -26,8 +26,8 @@ export const SendNativeSol = async (
       0 // note: simple accounts that just store native SOL have `0` bytes of data
     )
 
-    console.log('minimum balance', minimumBalance, amount * LAMPORTS_PER_SOL)
-    if (amount * LAMPORTS_PER_SOL < minimumBalance) {
+    console.log('minimum balance', minimumBalance, amount )
+    if (amount < minimumBalance) {
       // throw `account may not be rent exempt: ${toPubkey.toBase58()}`
       // return Response.json({
       //   error: `account may not be rent exempt: ${toPubkey.toBase58()}`,
@@ -38,7 +38,7 @@ export const SendNativeSol = async (
     const transferSolInstruction = SystemProgram.transfer({
       fromPubkey: fromPubkey,
       toPubkey: toPubkey,
-      lamports: amount * LAMPORTS_PER_SOL,
+      lamports: amount ,
     })
 
     // get the latest blockhash amd block height
