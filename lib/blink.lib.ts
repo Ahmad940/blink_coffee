@@ -46,8 +46,8 @@ export const generatePaymentBlink = ({
               label: 'Token',
               name: 'token',
               options: [
-                { label: 'Sol', value: 'sol', selected: true },
-                { label: 'Send', value: 'send' },
+                { label: 'SOL', value: 'sol', selected: true },
+                { label: 'SEND', value: 'send' },
                 { label: 'USDC', value: 'usdc' },
               ],
             },

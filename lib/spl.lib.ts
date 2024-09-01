@@ -7,6 +7,7 @@ import {
   ParsedAccountData,
   PublicKey,
   Transaction,
+  TransactionMessage,
   VersionedTransaction,
 } from '@solana/web3.js'
 
@@ -63,7 +64,7 @@ export const sendSPLToken = async (
 
   const tx = new Transaction()
   tx.add(txInstruction)
-
+  tx.feePayer = fromPubKey
   const latestBlockHash = await connection.getLatestBlockhash('confirmed')
   tx.recentBlockhash = await latestBlockHash.blockhash
   const signature = await tx.signature
@@ -108,6 +109,8 @@ export const jupSwap = async ({
         userPublicKey: userPubKey.toString(),
         // auto wrap and unwrap SOL. default is true
         wrapAndUnwrapSol: true,
+
+        
         // feeAccount is optional. Use if you want to charge a fee.  feeBps must have been passed in /quote API.
         // feeAccount: "fee_account_public_key"
       }),
@@ -118,6 +121,8 @@ export const jupSwap = async ({
   // deserialize the transaction
   const swapTransactionBuf = Buffer.from(swapTransaction, 'base64')
   const transaction = VersionedTransaction.deserialize(swapTransactionBuf)
+  
+  
   console.log(transaction)
 
   // sign the transaction

@@ -3,6 +3,7 @@ import { toast } from '@/components/ui/use-toast'
 import { useAuth } from '@/contexts/AuthContext'
 import { UserInterface } from '@/interfaces'
 import { UserService } from '@/lib/services/user.service'
+import { BlinkService } from '@/lib/services/blink.service'
 import { useEffect, useState } from 'react'
 import { useWallet } from '@solana/wallet-adapter-react'
 
@@ -13,6 +14,40 @@ export const ProfileCard = () => {
   const { user } = useAuth()
 
   const { publicKey }:any = useWallet()
+  const hanleGenerateBlink = async () => {
+    BlinkService.createBlink({
+      user_id: `${user?.user_name}`,
+      category_id: `payment`,
+      title: `Blink Me `,
+      image_url: `${user?.profile_img}`,
+      description: `Buy me a Coffee`,
+      label: `Blink Me`,
+      pub_key: publicKey
+    })
+    if (!publicKey) return
+    const blinkit = await  BlinkService.createBlink({
+      user_id: `${user?.id}`,
+      category_id: `cm0azdecj000313lytkph9fye`,
+      title: `Blink Me `,
+      image_url: `${user?.profile_img}`,
+      description: `Buy me a Coffee`,
+      label: `Blink Me`,
+      pub_key: publicKey.toString()
+    })
+
+    if (!blinkit.success)
+      return toast({
+        title: 'Unable to Create Blink',
+        description: blinkit?.message,
+        variant: 'destructive',
+      })
+    toast({
+      title: 'Blink Created successfully',
+    })
+
+    console.log('Create Blink info', blinkit.data)
+    
+  }
   const fetchUser = async () => {
     
     setUserLoading(true)
@@ -61,7 +96,7 @@ export const ProfileCard = () => {
             <p className='text-[54px] mt-1 font-extrabold'>$0</p>
           </div>
           <div className='w-[200px] ml-auto py-[70px] mr-[60px]'>
-            <button className='w-[230px] rounded-md h-10 bg-[#512DA8] text-md'>
+            <button onClick={() => hanleGenerateBlink()} className='w-[230px] rounded-md h-10 bg-[#512DA8] text-md'>
               Generate Blink
             </button>
           </div>
