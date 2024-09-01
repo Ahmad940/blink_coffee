@@ -3,15 +3,16 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useEffect, useState } from "react"
 import { toast } from "@/components/ui/use-toast"
 import { ApiResponse, UserInterface } from "@/interfaces"
-export const ProfileCard = () => {
+export const UserDetails = ({slug}:any) => {
     const [userLoading,setUserLoading] = useState<Boolean>(false)
     const [userData,setUserData] = useState<UserInterface>()
     const { user } = useAuth()
     const [PKey,setPkey] = useState<any>(null);
 
     const fetchUser = async () => {
+        setPkey(user?.pub_key)
         setUserLoading(true)
-        const { message, success, data } = await UserService.getUser(PKey)
+        const { message, success, data } = await UserService.getUserByName(slug)
         if (!success)
           return toast({
             title: 'Error while fetching blink',
