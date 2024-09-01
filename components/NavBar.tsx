@@ -42,7 +42,7 @@ export const NavigationBar = () => {
                       <span>Profile</span>
                     </DropdownMenuItem>
                   </Link>
-                  <Link href={'/profile'}>
+                  <Link href={'/edit-profile'}>
                     <DropdownMenuItem>
                       <Edit className='mr-2 h-4 w-4' />
                       <span>Edit Profile</span>
