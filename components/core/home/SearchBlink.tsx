@@ -52,6 +52,7 @@ export const SearchLayout = ({ search }: Props) => {
       })
 
     setBlinks(data)
+    console.log(data)
   }
 
   useEffect(() => {
